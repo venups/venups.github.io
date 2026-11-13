@@ -37,7 +37,7 @@ export function workNeighbours(slug) {
 
 export function formatDate(value) {
   if (!value) return '';
-  const date = value instanceof Date ? value : new Date(`${value}T00:00:00`);
+  const date = value instanceof Date ? value : new Date(/^\d{4}-\d{2}-\d{2}$/.test(String(value)) ? `${value}T00:00:00` : value);
   if (Number.isNaN(date.getTime())) return String(value);
   return new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: 'numeric' }).format(date);
 }
