@@ -1,0 +1,59 @@
+/*
+ * tokens.css: every colour, font and spacing value the site uses.
+ * Change a value here and it changes everywhere. Light theme first, dark below.
+ */
+:root {
+  /* Colour: warm paper, ink, one gold accent */
+  --bg: #f4f1ec;
+  --surface: #ece8e1;
+  --surface-2: #e4dfd6;
+  --ink: #1f1e1c;
+  --ink-2: #4a4743; /* secondary text */
+  --ink-3: #6f6a64; /* captions, metadata */
+  --rule: rgba(31, 30, 28, 0.14);
+  --rule-strong: rgba(31, 30, 28, 0.32);
+  --gold: #b68235; /* lines, marks, decoration */
+  --gold-ink: #865a14; /* gold that is readable as text on paper */
+  --gold-wash: rgba(182, 130, 53, 0.1);
+
+  /* The dark band (flagship, contact) keeps its own colours in both themes */
+  --band-bg: #1c1b19;
+  --band-ink: #f1ede6;
+  --band-ink-2: rgba(241, 237, 230, 0.72);
+  --band-rule: rgba(241, 237, 230, 0.16);
+  --band-gold: #d9a24e;
+
+  /* Type */
+  --font-display: 'Cormorant Garamond', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+  --font-body: 'Lora Variable', 'Lora', Georgia, 'Times New Roman', serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+  /* Layout */
+  --page: 1200px;
+  --measure: 68ch;
+  --gutter: clamp(20px, 5vw, 56px);
+  --section: clamp(76px, 10vw, 148px);
+  --nav-h: 68px;
+  --radius: 3px;
+
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  --bg: #141311;
+  --surface: #1c1a17;
+  --surface-2: #24211d;
+  --ink: #ece8e1;
+  --ink-2: #c3beb5;
+  --ink-3: #9b958b;
+  --rule: rgba(236, 232, 225, 0.14);
+  --rule-strong: rgba(236, 232, 225, 0.34);
+  --gold: #d9a24e;
+  --gold-ink: #e2b166;
+  --gold-wash: rgba(217, 162, 78, 0.1);
+
+  --band-bg: #1f1d1a;
+  --band-rule: rgba(241, 237, 230, 0.14);
+  color-scheme: dark;
+}
