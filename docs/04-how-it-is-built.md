@@ -68,7 +68,7 @@ Fonts are bundled with the site (the `@fontsource` packages), so nothing is requ
 
 Two files, deliberately separated.
 
-**`src/lib/bridge-model.js`** is the engineering. It has no graphics code. It defines the geometry (`G`: spans, tower height, sag, panel spacing), builds the list of line segments, and contains `deflection(x, X)`: the vertical movement at station `x` for a point load at station `X`. That function is a drawing aid, not an analysis. It reproduces the behaviour you would expect of a suspension span: the deck dips under the load, the far half of the main span rises as the cable shifts, the unloaded spans lift slightly, and nothing moves at the towers.
+**`src/lib/bridge-model.js`** is the engineering. It has no graphics code. It defines the geometry (`G`: spans, tower height, sag, panel spacing), builds the list of line segments, and contains `deflection(x, X)`: the vertical movement at station `x` for a point load at station `X`. That function is a drawing aid, not an analysis. It reproduces the behaviour you would expect of a suspension span: the deck dips under the load, the far half of the main span rises because the cable cannot simply get longer, the unloaded side spans lift slightly, and nothing moves at the towers.
 
 **`src/components/BridgeScene.jsx`** is the graphics. It hands those segments to three.js, moves a load across the deck, re-evaluates the deflected shape each frame, and lets the visitor's pointer become the load.
 
@@ -80,7 +80,9 @@ Things worth knowing:
 - If a visitor has "reduce motion" switched on, the bridge is drawn still.
 - If the browser cannot run WebGL, a flat line drawing is shown instead.
 
-To change the bridge, edit the numbers in `G` at the top of `bridge-model.js`. Try `towerTop`, `sagClear` or `side`.
+To change the bridge, edit the numbers in `G` at the top of `bridge-model.js`. Try `towerTop`, `sagClear` or `side`. The three numbers under "Deflected shape" (`DIP_WIDTH`, `CABLE_STIFFNESS`, `SIDE_LIFT`) change how the bridge moves.
+
+`src/lib/three-kit.js` lists the parts of three.js the bridge uses. If you use a new three.js class in `BridgeScene.jsx`, add its name there.
 
 ## Add a line drawing
 

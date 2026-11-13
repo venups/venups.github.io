@@ -6,4 +6,4 @@ kind: bridge
 related: ambassador-bridge-deck
 order: 3
 ---
-Reviewing thousands of shop drawings for the grid deck replacement, I identified fabrication and installation errors while they were still on paper. That saved hundreds of thousands of dollars in construction cost and significant time.
+Shop drawings are the last check before fabrication. Reviewing thousands of them for the grid deck replacement, I identified fabrication and installation errors while they were still on paper. That saved hundreds of thousands of dollars in construction cost and significant time.

@@ -27,11 +27,17 @@ export function getPost(slug) {
   return writing.find((item) => item.slug === slug);
 }
 
+/**
+ * The case studies before and after this one, for the pager at the foot of a
+ * case study. The list wraps around, so the first study links back to the last
+ * and the last links on to the first: every page always has both neighbours.
+ */
 export function workNeighbours(slug) {
   const index = work.findIndex((item) => item.slug === slug);
+  if (index < 0 || work.length < 2) return { prev: null, next: null };
   return {
-    prev: index > 0 ? work[index - 1] : null,
-    next: index >= 0 && index < work.length - 1 ? work[index + 1] : null,
+    prev: work[(index - 1 + work.length) % work.length],
+    next: work[(index + 1) % work.length],
   };
 }
 

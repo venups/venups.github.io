@@ -11,6 +11,7 @@ import Figure from '../components/Figure.jsx';
 import Reveal from '../components/Reveal.jsx';
 import SectionHead from '../components/SectionHead.jsx';
 import WorkCard from '../components/WorkCard.jsx';
+import CaseLink from '../components/CaseLink.jsx';
 
 /**
  * Home.jsx: the landing page. Each <section> below is one chapter of the
@@ -155,7 +156,7 @@ export default function Home() {
             num="03"
             label="Selected work"
             title={<>Bridges that stand. <em>Tools that ship.</em></>}
-            lead="Each case study states the problem, my role, and what was delivered. Filter by discipline, or read them in order."
+            lead="Each case study states the problem, why it was hard, my role, and what the work shows. Filter by discipline, or read them in order."
           >
             <div className="filter" role="group" aria-label="Filter work">
               {[
@@ -246,7 +247,12 @@ export default function Home() {
       {/* ── 06 Recognition ─────────────────────────────────────────── */}
       <section className="section" id="recognition">
         <div className="container">
-          <SectionHead num="06" label="Recognition" title={<>Awards, papers <em>and talks.</em></>} />
+          <SectionHead
+            num="06"
+            label="Recognition"
+            title={<>Awards, papers <em>and talks.</em></>}
+            lead="Recognition from both sides of the work: the engineering profession and the technology that now supports it."
+          />
           <div className="recog">
             <Reveal className="recog__col">
               <h3 className="recog__h label">Awards</h3>
@@ -257,6 +263,7 @@ export default function Home() {
                     <span>
                       <strong>{a.name}</strong>
                       <em>{a.by}</em>
+                      <CaseLink slug={a.related} />
                     </span>
                   </li>
                 ))}
@@ -273,6 +280,7 @@ export default function Home() {
                       <em>
                         {p.authors} {p.venue}
                       </em>
+                      <CaseLink slug={p.related} />
                     </span>
                   </li>
                 ))}
@@ -287,6 +295,7 @@ export default function Home() {
                     <span>
                       <strong>{t.title}</strong>
                       <em>{t.where}</em>
+                      <CaseLink slug={t.related} />
                     </span>
                   </li>
                 ))}
@@ -327,7 +336,12 @@ export default function Home() {
       {/* ── 08 Toolbox ─────────────────────────────────────────────── */}
       <section className="section" id="toolbox">
         <div className="container">
-          <SectionHead num="08" label="Toolbox" title={<>Standards, software <em>and code.</em></>} />
+          <SectionHead
+            num="08"
+            label="Toolbox"
+            title={<>Standards, software <em>and code.</em></>}
+            lead="What I work with. Filled chips are the tools and standards I use most."
+          />
           <Reveal className="toolbox">
             {skills.map((g) => (
               <div className="toolbox__row" key={g.group}>

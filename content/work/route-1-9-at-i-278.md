@@ -11,6 +11,7 @@ location: New Jersey
 figure: interchange
 cover: ""
 tags: [Task leadership, Preliminary design, Alternatives analysis, Seismic, NJDOT]
+related: [interstate-bridge-jacking, mlk-bridge-deck-replacement]
 metrics:
   - value: "3 spans"
     label: steel bridge, preliminary design
@@ -19,6 +20,10 @@ metrics:
 ## The project
 
 The interchange improvements add the missing connections between I-278 and US Route 1&9 to improve traffic flow and safety. Bridge No. 2 is a three-span steel bridge.
+
+## What preliminary design decides
+
+Preliminary design is where the expensive decisions are made: the structure type, the span arrangement, the structural depth and the foundations. Later phases refine those choices. They rarely reverse them. The work is to compare the realistic options fairly, put a cost on each, and give the owner a recommendation it can defend.
 
 ## My role
 

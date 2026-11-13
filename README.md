@@ -17,7 +17,7 @@ Other commands:
 
 | Command | What it does |
 |---|---|
-| `npm run check` | Reads every content file and lists mistakes (missing title, missing image, wrong name) |
+| `npm run check` | Reads every content file and lists mistakes (missing title, missing image, wrong name), then draws every page and follows every internal link, so a blank page or a dead link is caught before it is published |
 | `npm run build` | Produces the finished site in `dist/` |
 | `npm run preview` | Serves `dist/` locally, exactly as it will be published |
 
@@ -45,9 +45,9 @@ src/                HOW THE SITE LOOKS AND BEHAVES
   lib/                content loader, hooks, the bridge geometry
 
 plugins/            turns Markdown files into pages at build time
-scripts/            post-build step (per-page HTML, 404, sitemap) and the content checker
+scripts/            post-build step (per-page HTML, 404, sitemap), the content checker and the page-and-link checker
 docs/               the guides below
-docs/deploy-workflow.yml   the GitHub Pages publishing workflow (copy to .github/workflows/, see guide 1)
+.github/workflows/  deploy.yml builds and publishes the site every time `main` changes
 ```
 
 The rule of the codebase: **content is data.** To change what the site says, edit `content/`. You only touch `src/` to change the design.
@@ -78,10 +78,9 @@ git commit -m "Add my project"
 git push                           # GitHub builds and publishes when this reaches main
 ```
 
-## Before the first publish
+## Still to review
 
-- [ ] Switch on automatic publishing: `mkdir -p .github/workflows && cp docs/deploy-workflow.yml .github/workflows/deploy.yml`
-- [ ] On GitHub: **Settings → Pages → Source: GitHub Actions** (do this before merging to `main`)
+- [x] Automatic publishing is switched on (`.github/workflows/deploy.yml`, with **Settings → Pages → Source: GitHub Actions**)
 - [ ] Read every page once and correct anything that is not exactly right
 - [ ] Confirm your employer is comfortable with the project details shown
 - [ ] Review the article in `content/writing/` and replace the calculator defaults with your own measurements

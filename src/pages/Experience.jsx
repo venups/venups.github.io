@@ -2,8 +2,10 @@ import { site } from '/content/site.js';
 import { experience, education, licensure } from '/content/career.js';
 import { awards, publications, talks, service } from '/content/recognition.js';
 import { skills } from '/content/skills.js';
-import { asset } from '../lib/content.js';
+import { Link } from 'react-router-dom';
+import { asset, getWork } from '../lib/content.js';
 import { useMeta } from '../lib/hooks.js';
+import CaseLink from '../components/CaseLink.jsx';
 
 /**
  * Experience.jsx: the web résumé. It prints cleanly, so "Print or save as PDF"
@@ -65,6 +67,16 @@ export default function Experience() {
                   </ul>
                 </div>
               ))}
+              {job.caseStudies?.some(getWork) && (
+                <p className="job__cases">
+                  <span className="label">Case studies</span>
+                  {job.caseStudies.map(getWork).filter(Boolean).map((w) => (
+                    <Link key={w.slug} to={`/work/${w.slug}`}>
+                      {w.title}
+                    </Link>
+                  ))}
+                </p>
+              )}
             </div>
           ))}
         </section>
@@ -124,6 +136,7 @@ export default function Experience() {
                 <span>
                   <strong>{a.name}</strong>
                   <em>{a.by}</em>
+                  <CaseLink slug={a.related} />
                 </span>
               </li>
             ))}
@@ -141,6 +154,7 @@ export default function Experience() {
                   <em>
                     {p.authors} {p.venue}
                   </em>
+                  <CaseLink slug={p.related} />
                 </span>
               </li>
             ))}
@@ -150,6 +164,7 @@ export default function Experience() {
                 <span>
                   <strong>{t.title}</strong>
                   <em>{t.where}</em>
+                  <CaseLink slug={t.related} />
                 </span>
               </li>
             ))}

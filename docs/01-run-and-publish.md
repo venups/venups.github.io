@@ -25,13 +25,7 @@ GitHub can build and publish the site for you every time the `main` branch chang
 
 ### One-time setup
 
-1. Put the workflow file in place. It ships in `docs/` and has to be copied to the folder GitHub reads:
-
-```bash
-mkdir -p .github/workflows
-cp docs/deploy-workflow.yml .github/workflows/deploy.yml
-```
-
+1. The workflow file is already in place at `.github/workflows/deploy.yml`. Nothing to copy.
 2. On github.com open the repository, then **Settings → Pages**.
 3. Under **Build and deployment**, set **Source** to **GitHub Actions**.
 
@@ -52,7 +46,7 @@ git push origin main
 git checkout dev
 ```
 
-Then open the **Actions** tab on GitHub. A run called "Deploy to GitHub Pages" takes about a minute. When it shows a green tick, the site is live. If it shows a red cross, click it: the log names the file and line that is wrong (most often a typo in a content file, which `npm run check` would have caught).
+Then open the **Actions** tab on GitHub. A run called "Deploy to GitHub Pages" takes about a minute. When it shows a green tick, the site is live. If it shows a red cross, click it: the log names the file and line that is wrong (most often a typo in a content file, which `npm run check` would have caught). The workflow runs `npm run check` before it publishes, so a page that fails to draw or a link that goes nowhere stops the deploy and the live site stays as it was.
 
 If you prefer, open a pull request from `dev` to `main` on GitHub and press Merge instead of the four `main` commands above.
 

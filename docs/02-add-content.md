@@ -49,11 +49,12 @@ The file name becomes the web address. `content/work/tappan-zee.md` is published
 | `cover` | | A photo to show instead of the drawing |
 | `coverCaption` | | Caption or credit on the photo |
 | `tags` | | Topics listed beside the text |
+| `related` | | Other case studies to list beside the text as "Related work": file names without `.md`, e.g. `[steel-bridge-pal, us-20-fox-river]` |
 | `metrics` | | Numbers shown in a band on the page. The first also appears on the card |
 | `links` | | External links listed beside the text |
 | `draft` | | `true` hides it from the published site |
 
-3. Write the body. The structure that reads best to a recruiter is: **the problem**, **my role**, **what I did**, **the result**. Lead with the result where you have a number.
+3. Write the body. The structure that reads best to a recruiter is: **the project**, **why it is hard**, **my role**, **the result**, **what it shows**. Lead with the result where you have a number. To link to another page of the site from the text, write `[Steel Bridge Pal](/work/steel-bridge-pal)`.
 4. Set `draft: false` (or delete the line), run `npm run check`, and publish.
 
 ### Line drawings available for `figure`

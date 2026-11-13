@@ -15,6 +15,8 @@ export default function WorkDetail() {
   if (!item) return <NotFound />;
 
   const { prev, next } = workNeighbours(slug);
+  // `related:` in the front matter lists other case studies by file name.
+  const related = (item.related || []).map(getWork).filter((r) => r && r.slug !== item.slug);
   const facts = [
     ['Role', item.role],
     ['Client', item.client],
@@ -68,7 +70,7 @@ export default function WorkDetail() {
 
       <div className="container page__body">
         <Prose blocks={item.blocks} />
-        <aside className="page__aside">
+        <aside className="page__aside" aria-label="About this case study">
           {item.tags?.length > 0 && (
             <div>
               <div className="label">Topics</div>
@@ -79,6 +81,18 @@ export default function WorkDetail() {
                   </span>
                 ))}
               </div>
+            </div>
+          )}
+          {related.length > 0 && (
+            <div>
+              <div className="label">Related work</div>
+              <ul className="page__links">
+                {related.map((r) => (
+                  <li key={r.slug}>
+                    <Link to={`/work/${r.slug}`}>{r.title}</Link>
+                  </li>
+                ))}
+              </ul>
             </div>
           )}
           {item.links?.length > 0 && (
@@ -98,16 +112,26 @@ export default function WorkDetail() {
         </aside>
       </div>
 
-      <nav className="container pager" aria-label="More work">
-        <Link to={`/work/${prev.slug}`} className="pager__link">
-          <span className="label">← Previous</span>
-          <span className="pager__title">{prev.title}</span>
-        </Link>
-        <Link to={`/work/${next.slug}`} className="pager__link pager__link--next">
-          <span className="label">Next →</span>
-          <span className="pager__title">{next.title}</span>
-        </Link>
-      </nav>
+      {(prev || next) && (
+        <nav className="container pager" aria-label="More work">
+          {prev ? (
+            <Link to={`/work/${prev.slug}`} className="pager__link">
+              <span className="label">← Previous</span>
+              <span className="pager__title">{prev.title}</span>
+            </Link>
+          ) : (
+            <span />
+          )}
+          {next ? (
+            <Link to={`/work/${next.slug}`} className="pager__link pager__link--next">
+              <span className="label">Next →</span>
+              <span className="pager__title">{next.title}</span>
+            </Link>
+          ) : (
+            <span />
+          )}
+        </nav>
+      )}
     </article>
   );
 }

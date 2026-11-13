@@ -635,6 +635,11 @@
   margin-top: 4px;
 }
 
+.ledger__link {
+  margin-top: 10px;
+  font-size: 11px;
+}
+
 @media (max-width: 980px) {
   .recog {
     grid-template-columns: 1fr;

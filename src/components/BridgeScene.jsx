@@ -161,10 +161,12 @@ function start(THREE, mount) {
     view.pitch = 0.085 + 0.05 * narrow;
     const span = (G.L * 2 + 56) * (1 - 0.42 * narrow); // length that must fit across the screen
     const visibleWidth = span * Math.cos(view.yaw);
-    view.dist = (visibleWidth / aspect / (2 * Math.tan((camera.fov * Math.PI) / 360))) * 1.02;
+    view.dist = (visibleWidth / aspect / (2 * Math.tan((camera.fov * Math.PI) / 360))) * (1.02 + 0.07 * (1 - narrow));
     // Look at a point above the deck so the bridge sits in the lower part of the hero.
     const visibleHeight = 2 * view.dist * Math.tan((camera.fov * Math.PI) / 360);
-    view.target.set(0, visibleHeight * 0.5 - 27 - 6 * narrow, 0);
+    // The camera stands left of centre, so the near (left) end of the bridge
+    // looks longer. Aim a little left on wide screens to keep both anchorages in view.
+    view.target.set(-9 * (1 - narrow), visibleHeight * 0.5 - 27 - 6 * narrow, 0);
     scene.fog.near = view.dist - 40;
     scene.fog.far = view.dist + 190;
     needsRender = true;

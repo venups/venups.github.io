@@ -1,12 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 export function useTheme() {
+  // index.html has already set data-theme before the first paint (the saved
+  // choice, or else the system light/dark setting). Start from that.
   const [theme, setTheme] = useState(() => {
-    try {
-      return localStorage.getItem('theme') === 'dark' ? 'dark' : 'light';
-    } catch {
-      return document.documentElement.getAttribute('data-theme') || 'light';
-    }
+    if (typeof document === 'undefined') return 'light';
+    return document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
   });
 
   const toggleTheme = useCallback(() => {

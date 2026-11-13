@@ -1,7 +1,8 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import Nav from './components/Nav.jsx';
 import Footer from './components/Footer.jsx';
 import ScrollManager from './components/ScrollManager.jsx';
+import ErrorBoundary from './components/ErrorBoundary.jsx';
 import Home from './pages/Home.jsx';
 import WorkDetail from './pages/WorkDetail.jsx';
 import WritingDetail from './pages/WritingDetail.jsx';
@@ -13,19 +14,22 @@ import NotFound from './pages/NotFound.jsx';
  * To add a new page: create src/pages/MyPage.jsx and add a <Route> below.
  */
 export default function App() {
+  const { pathname } = useLocation();
   return (
     <>
       <a className="skip-link" href="#main">Skip to content</a>
       <ScrollManager />
       <Nav />
       <main id="main">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/work/:slug" element={<WorkDetail />} />
-          <Route path="/writing/:slug" element={<WritingDetail />} />
-          <Route path="/experience" element={<Experience />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <ErrorBoundary key={pathname}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/work/:slug" element={<WorkDetail />} />
+            <Route path="/writing/:slug" element={<WritingDetail />} />
+            <Route path="/experience" element={<Experience />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </ErrorBoundary>
       </main>
       <Footer />
     </>

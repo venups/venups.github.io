@@ -1,10 +1,13 @@
 /**
  * content/recognition.js: awards, publications, talks and professional service.
  * Add a new line at the top of the right list. Newest first.
+ *
+ * `related` (optional) is the file name of a case study in content/work,
+ * without ".md". It adds a "Case study" link beside the entry.
  */
 
 export const awards = [
-  { year: '2026', name: 'Technology Innovation Award, Winner', by: 'GFT · 2026 Technology Innovation Challenge' },
+  { year: '2026', name: 'Technology Innovation Award, Winner', by: 'GFT · 2026 Technology Innovation Challenge', related: 'steel-bridge-pal' },
   { year: '2026', name: 'Young Member of the Year', by: 'American Society of Highway Engineers (ASHE)' },
   { year: '2021', name: 'Spot Bonus Award for exceptional performance', by: 'Modjeski and Masters' },
   { year: '2017', name: 'International Education Fee Scholarship', by: 'Texas A&M University' },
@@ -17,6 +20,7 @@ export const publications = [
     title: 'AI-Assisted Bridge Design Automation and Building Intelligent Data',
     authors: 'Pokuri, V., & Greenholt, M.',
     venue: 'International Bridge Conference, paper IBC 26-23 · AI / Digital Delivery session',
+    related: 'steel-bridge-pal',
   },
   {
     year: '2023',
@@ -33,11 +37,11 @@ export const publications = [
 ];
 
 export const talks = [
-  { year: '2026', title: 'AI-Assisted Bridge Design Automation', where: 'International Bridge Conference, National Harbor, MD' },
+  { year: '2026', title: 'AI-Assisted Bridge Design Automation', where: 'International Bridge Conference, National Harbor, MD', related: 'steel-bridge-pal' },
   { year: '2026', title: 'Conference presentation', where: 'ASHE National Conference, North Bethesda, MD' },
-  { year: '2025', title: 'AI in Action for Bridge Engineering', where: 'GFT INSIGHTS · 211 live attendees, 164 on-demand views' },
+  { year: '2025', title: 'AI in Action for Bridge Engineering', where: 'GFT INSIGHTS · 211 live attendees, 164 on-demand views', related: 'gft-transportation-suite' },
   { year: '2025', title: 'CSiBridge modeling best practices', where: 'Bridge-group lunch-and-learn, recorded for reuse' },
-  { year: '2023', title: 'STAAD.Pro post-processing with Excel VBA macros', where: 'CQI session for the bridge group' },
+  { year: '2023', title: 'STAAD.Pro post-processing with Excel VBA macros', where: 'CQI session for the bridge group', related: 'engineering-automation' },
 ];
 
 export const service = [

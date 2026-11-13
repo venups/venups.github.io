@@ -7,6 +7,9 @@
  *
  * To add a new role, copy one { ... } block, paste it at the TOP of the list
  * and change the text. Newest first.
+ *
+ * `caseStudies` (optional) lists file names from content/work, without ".md".
+ * Each one becomes a link under that role on the Experience page.
  */
 
 /** Home page timeline. Each stop has a structures line and a software line. */
@@ -36,7 +39,7 @@ export const path = [
     years: '2019 – 2023',
     place: 'Modjeski and Masters',
     role: 'Engineer I to III, Structures · Philadelphia',
-    structures: 'Fracture-critical deck replacement as lead structural engineer; Ambassador Bridge deck; erection analysis of a record-size wildlife crossing.',
+    structures: 'Lead structural engineer on a fracture-critical deck replacement; Ambassador Bridge grid deck; erection analysis of the Tobin Land Bridge, a record-size wildlife crossing.',
     systems: 'Excel VBA driving SAP2000 for erection analysis. Began the MITx program in statistics and data science; co-authored ML research.',
   },
   {
@@ -64,6 +67,8 @@ export const experience = [
     dates: 'Jun 2023 – Present',
     location: 'Marlton, NJ',
     progression: 'Structural Staff Engineer (Jun 2023) → Structural Engineer (Apr 2025) → Senior Project Engineer, Bridge & Technology (Sep 2026)',
+    // File names of case studies in content/work. They appear as links under this role.
+    caseStudies: ['steel-bridge-pal', 'gft-transportation-suite', 'us-20-fox-river', 'newark-bay-hudson-county-extension', 'route-1-9-at-i-278', 'interstate-bridge-jacking', 'wmata-georgia-avenue-load-rating'],
     groups: [
       {
         label: 'Bridge engineering',
@@ -97,6 +102,7 @@ export const experience = [
     dates: 'Feb 2019 – Jun 2023',
     location: 'Philadelphia, PA',
     progression: 'Engineer I (Feb 2019) → Engineer II (Jan 2021) → Engineer III (Aug 2021)',
+    caseStudies: ['tobin-land-bridge', 'mlk-bridge-deck-replacement', 'ambassador-bridge-deck'],
     groups: [
       {
         items: [
@@ -159,6 +165,7 @@ export const experience = [
     title: 'Graduate Engineer Trainee to Senior Engineer, Civil Structural',
     dates: 'Jan 2014 – Jul 2016',
     location: 'Chennai, India',
+    caseStudies: ['engineering-automation'],
     groups: [
       {
         items: [

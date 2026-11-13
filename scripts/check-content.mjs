@@ -2,7 +2,8 @@
  * scripts/check-content.mjs: run with `npm run check`.
  * Reads every file in /content and reports the mistakes that are easy to make:
  * a missing title, an unknown figure name, a cover image that does not exist,
- * a story that points at a case study that is not there.
+ * a story that points at a case study that is not there, a link in the text
+ * to a page that does not exist.
  */
 import { readFile, readdir, access } from 'node:fs/promises';
 import path from 'node:path';
@@ -42,11 +43,36 @@ async function common(item, required) {
   for (const m of item.body.matchAll(/!\[[^\]]*\]\((\/[^)\s]+)/g)) {
     if (!(await exists(path.join(root, 'public', m[1])))) problems.push(`${item.file}: image not found at public${m[1]}`);
   }
+  // Links in the text to other pages of the site, e.g. [Steel Bridge Pal](/work/steel-bridge-pal)
+  for (const m of item.body.matchAll(/(?<!!)\[[^\]]*\]\((\/[^)\s#]*)(#[^)\s]*)?\)/g)) {
+    const target = m[1].replace(/(.)\/$/, '$1');
+    if (/\.[a-z0-9]{2,5}$/i.test(target)) {
+      if (!(await exists(path.join(root, 'public', target)))) problems.push(`${item.file}: linked file not found at public${target}`);
+    } else if (!pageExists(target)) {
+      problems.push(`${item.file}: link to "${target}" does not match any page. Pages are / , /experience , /work/<file name> and /writing/<file name>`);
+    }
+  }
 }
+
+function pageExists(target) {
+  if (target === '/' || target === '/experience') return true;
+  const [, folder, slug] = target.match(/^\/(work|writing)\/([^/]+)$/) || [];
+  if (folder === 'work') return work.some((w) => w.slug === slug && !w.a.draft);
+  if (folder === 'writing') return writing.some((p) => p.slug === slug && !p.a.draft);
+  return false;
+}
+const isCaseStudy = (slug) => work.some((w) => w.slug === slug);
 
 for (const w of work) {
   await common(w, ['title', 'kind', 'summary']);
   if (w.a.kind && !['bridge', 'software'].includes(w.a.kind)) problems.push(`${w.file}: kind must be "bridge" or "software"`);
+  if (w.a.related && !Array.isArray(w.a.related)) problems.push(`${w.file}: related should be a list, e.g.  related: [steel-bridge-pal, us-20-fox-river]`);
+  for (const slug of Array.isArray(w.a.related) ? w.a.related : []) {
+    if (!isCaseStudy(slug)) problems.push(`${w.file}: related "${slug}" does not match any file in content/work`);
+  }
+  for (const l of w.a.links || []) {
+    if (!l.label || !/^https?:\/\//.test(l.url || '')) problems.push(`${w.file}: each entry under links needs a label and a url that starts with https://`);
+  }
 }
 for (const s of stories) {
   await common(s, ['metric', 'title']);
@@ -55,6 +81,20 @@ for (const s of stories) {
 for (const p of writing) {
   await common(p, ['title', 'date', 'summary']);
   if (p.a.date && Number.isNaN(new Date(p.a.date).getTime())) problems.push(`${p.file}: date should look like 2026-11-12`);
+}
+
+// Case-study links from the career and recognition lists.
+const { experience } = await import(path.join(root, 'content/career.js'));
+const recognition = await import(path.join(root, 'content/recognition.js'));
+for (const job of experience) {
+  for (const slug of job.caseStudies || []) {
+    if (!isCaseStudy(slug)) problems.push(`content/career.js: caseStudies "${slug}" (${job.org}) does not match any file in content/work`);
+  }
+}
+for (const [list, items] of Object.entries(recognition)) {
+  for (const entry of Array.isArray(items) ? items : []) {
+    if (entry.related && !isCaseStudy(entry.related)) problems.push(`content/recognition.js: related "${entry.related}" in ${list} does not match any file in content/work`);
+  }
 }
 
 console.log(`Checked ${work.length} case studies, ${stories.length} stories, ${writing.length} articles.`);

@@ -21,6 +21,8 @@ figure: girder            # line drawing: suspension, curved-girder, viaduct, in
 cover: ""                 # or a photo: /images/work/my-new-bridge/cover.jpg  (replaces the drawing)
 coverCaption: ""          # optional caption on the photo, e.g. a photo credit
 tags: [Steel girders, Staged construction]
+related: [steel-bridge-pal, us-20-fox-river]   # optional: file names of other case studies (without .md),
+                          # listed as "Related work" beside the text
 metrics:                  # optional; the first one also shows on the card
   - value: "3 spans"
     label: what the number means
@@ -32,7 +34,11 @@ draft: true               # change to false (or delete the line) to publish
 
 ## The project
 
-What was being built or solved, and why it was hard. Two or three sentences.
+What was being built or solved. Two or three sentences a non-engineer can follow.
+
+## Why it is hard
+
+What made this one difficult. A short list works well.
 
 ## My role
 
@@ -42,5 +48,10 @@ What was being built or solved, and why it was hard. Two or three sentences.
 ## Outcome
 
 What changed because of the work. Use a number where you have one.
+
+## What it shows
+
+One or two sentences on what this project says about how you work.
+To link to another page of the site, write [Steel Bridge Pal](/work/steel-bridge-pal).
 
 ![Caption for a photo inside the text](/images/work/my-new-bridge/photo-1.jpg)

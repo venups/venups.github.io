@@ -11,6 +11,7 @@ status: In service
 figure: pipeline
 cover: ""
 tags: [OpenBridge, CSiBridge, Automation, AI-assisted workflow, Validation]
+related: [newark-bay-hudson-county-extension, gft-transportation-suite, us-20-fox-river]
 metrics:
   - value: "≈200 h"
     label: saved per CSiBridge model
@@ -26,7 +27,9 @@ metrics:
 
 Every steel bridge is modeled at least twice. The design team builds it once in OpenBridge, with the alignment, girder layout, cross frames, plate sizes and deck. Then an analyst reads that model and builds it again, member by member, in CSiBridge for finite element analysis.
 
-The second build is slow, and it is where errors come in: a transposed plate thickness, a unit slip, a cross frame in the wrong bay. On a program with ten bridges the same expert work repeats ten times, and every design revision starts it again.
+The second build is slow, and it is where errors come in: a transposed plate thickness, a unit slip, a cross frame in the wrong bay. None of these stops the analysis from running. The model still solves and still prints results, and the mistake travels with them.
+
+On a program with ten bridges the same expert work repeats ten times, and every design revision starts it again. I was the finite element modeling lead on exactly that program, the [Newark Bay–Hudson County Extension](/work/newark-bay-hudson-county-extension), which is how I came to own the problem.
 
 ## What I built
 
@@ -40,13 +43,25 @@ Steel Bridge Pal extracts the OpenBridge information reports and generates a sta
 
 ## Why it is built this way
 
-Speed was the easy part. The design decision that matters is the fourth step. A tool that builds a model quickly and wrongly is worse than no tool, because people stop looking. So validation is part of the pipeline, not an afterthought, and the output is a model plus the evidence that it matches its source.
+Speed was the easy part. Three decisions matter more.
 
-The second decision is standardization. Ten analysts build ten slightly different models. One generator builds one kind, which makes checking, comparing and training far easier.
+**Validation is a step in the pipeline, not a favor done afterward.** A tool that builds a model quickly and wrongly is worse than no tool, because people stop looking. So the output is a model plus the evidence that it matches its source.
+
+**One generator, one kind of model.** Ten analysts build ten slightly different models. One generator builds one kind, which makes checking, comparing and training far easier. A reviewer who has understood one model has understood all ten.
+
+**The design model stays the single source of truth.** When the design changes, the analysis model can be generated again from the new reports, so nobody has to remember which edits were made by hand.
 
 ## Results
 
-On the Newark Bay–Hudson County Extension, the workflow saves an estimated 200 hours per CSiBridge model, or about 2,000 hours across ten bridges. It won GFT's 2026 Technology Innovation Award, and the approach was presented at the 2026 International Bridge Conference as *AI-Assisted Bridge Design Automation and Building Intelligent Data* (IBC 26-23) and at the ASHE National Conference.
+On the Newark Bay–Hudson County Extension, the workflow saves an estimated 200 hours per CSiBridge model, or about 2,000 hours across ten bridges.
+
+- **Recognition.** Winner of GFT's 2026 Technology Innovation Award.
+- **Published.** Presented at the 2026 International Bridge Conference as *AI-Assisted Bridge Design Automation and Building Intelligent Data* (paper IBC 26-23), and at the ASHE National Conference.
+- **Adopted.** It now sits within the [GFT Transportation application suite](/work/gft-transportation-suite), where I remain its product owner and architect.
+
+## Where the idea came from
+
+The first version of this idea was much smaller. On [US 20 over Fox River](/work/us-20-fox-river) I automated the input of user-defined wind loads into CSiBridge and cut the manual time by more than 80%. Steel Bridge Pal applies the same thinking to the whole model.
 
 ## What it shows
 

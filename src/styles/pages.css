@@ -747,6 +747,21 @@
   color: var(--ink-3);
 }
 
+/* Links from a role on the résumé page to its case studies. */
+.job__cases {
+  margin: 4px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 18px;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.job__cases .label {
+  margin-right: 2px;
+}
+
 .job__group {
   display: grid;
   gap: 10px;
@@ -900,6 +915,12 @@
   .reveal {
     opacity: 1 !important;
     transform: none !important;
+  }
+
+  /* Links to other pages mean nothing on paper. */
+  .job__cases,
+  .ledger__link {
+    display: none !important;
   }
 
   a {

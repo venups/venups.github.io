@@ -6,7 +6,7 @@ import { useLocation } from 'react-router-dom';
  * address (e.g. /#work) once that section exists on the page.
  */
 export default function ScrollManager() {
-  const { pathname, hash } = useLocation();
+  const { pathname, hash, key } = useLocation();
 
   useEffect(() => {
     if (!hash) {
@@ -28,7 +28,9 @@ export default function ScrollManager() {
     };
     timer = setTimeout(go, 0);
     return () => clearTimeout(timer);
-  }, [pathname, hash]);
+    // `key` changes on every navigation, so clicking a link to the section
+    // you are already on (for example "Work" twice) scrolls there again.
+  }, [pathname, hash, key]);
 
   return null;
 }
